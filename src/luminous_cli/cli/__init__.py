@@ -14,7 +14,8 @@ from luminous_cli.errors import EXIT_NETWORK, LuminousError, handle_error, stder
 app = typer.Typer(
     name="luminous",
     help="CLI for the Luminous API",
-    no_args_is_help=True,
+    no_args_is_help=False,
+    invoke_without_command=True,
     pretty_exceptions_enable=False,
 )
 
@@ -40,6 +41,15 @@ def main(
     ctx.obj["flag_company"] = company
     ctx.obj["flag_api_key"] = api_key
     ctx.obj["flag_profile"] = profile
+
+    # If no subcommand given, launch interactive shell
+    if ctx.invoked_subcommand is None:
+        import click as _click
+        from luminous_cli.cli.shell import run_shell
+
+        click_app = _click.get_current_context().find_root().command
+        run_shell(click_app)
+        raise typer.Exit()
 
 
 # Register sub-apps
