@@ -22,7 +22,7 @@ pip install luminous-cli
 pipx install luminous-cli
 
 # From source
-git clone https://github.com/brendonbeebeluminous/luminous-cli.git
+git clone https://github.com/LuminousInventory/luminous-cli.git
 cd luminous-cli
 pip install -e .
 ```
@@ -321,7 +321,7 @@ Add a `CLAUDE.md` to your project with the Luminous CLI reference so Claude can 
 ## Development
 
 ```bash
-git clone https://github.com/brendonbeebeluminous/luminous-cli.git
+git clone https://github.com/LuminousInventory/luminous-cli.git
 cd luminous-cli
 pip install -e ".[dev]"
 
