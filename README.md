@@ -83,26 +83,34 @@ Features: tab completion, command history (persisted), colored prompt with profi
 
 | Resource | Commands |
 |---|---|
-| **products** | `list` `get` `create` `update` `upsert` `delete` `tags` `custom-fields` |
-| **sales-orders** | `list` `get` `create` `export` `shipments` `tags` `custom-fields` |
+| **products** | `list` `get` `create` `update` `upsert` `delete` `add-alt-sku` `attach-boms` `detach-boms` `tags` `custom-fields` |
+| **sales-orders** | `list` `get` `create` `update` `export` `shipments` `tags` `custom-fields` |
 | **purchase-orders** | `list` `get` `create` `update` `delete` `items` `payments` |
 | **inventory** | `stocks` `adjust` |
 | **transfer-orders** | `list` `get` `create` |
 | **receiving-reports** | `list` `get` `create` |
 | **invoices** | `list` `get` `tags` `custom-fields` |
 | **companies** | `list` `get` `create` `update` `delete` `contacts` `products` `price-overrides` `tags` `custom-fields` |
-| **contacts** | `list` `get` `create` `update` `delete` |
+| **contacts** | `list` `get` `create` `update` `delete` `set-password` |
 | **boms** | `list` `get` `create` `update` `delete` |
 | **warehouses** | `list` `get` |
 | **locations** | `list` `get` |
 | **price-schedules** | `list` `get` |
 | **price-levels** | `list` `get` |
+| **bills** | `list` `get` `create` `update` `delete` `post` `hold` `unhold` `reopen` `variance` `auto-allocate` `summary` `inbox` `aging` `payments` `allocations` |
 | **stock-snapshot** | `get` |
 | **consumption** | `list` `export` |
 | **inventory-aging** | `list` `export` |
-| **bills** | `aging` |
 | **forecast** | `list` `get` `product` `export` `refresh-status` `warehouse` |
 | **reports** | `cogs` `close-books` `discrepancy` `edi` |
+| **currency** | `list` `base` `set-base` `rates` `create-rate` `convert` |
+| **fulfillment-orders** | `list` |
+| **payment-obligations** | `list` `get` `update` `dashboard` `link-bill` `unlink-bill` |
+| **prepayments** | `list` `create` `apply` `reverse` |
+| **vendor-credits** | `list` `get` `create` `apply` `cancel` `reverse` `vendor-statement` |
+| **vendor-returns** | `list` `get` `create` `process` `cancel` `generate-credit` |
+| **integration-field-mappings** | `list` `get` `create` `update` `delete` `bulk-create` `bulk-delete` `field-names` `groups` `suggest-carrier` |
+| **integration-mappings** | `list` `get` `create` `update` `delete` |
 
 ### Auth & Config
 

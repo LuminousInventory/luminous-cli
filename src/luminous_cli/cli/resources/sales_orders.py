@@ -38,7 +38,7 @@ spec = ResourceSpec(
         ("Qty", "total_order_quantity", ""),
         ("Updated", "updated_at", "dim"),
     ],
-    capabilities={"list", "get", "create"},
+    capabilities={"list", "get", "create", "update"},
 )
 
 group = make_resource_group(spec)

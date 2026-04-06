@@ -21,9 +21,17 @@ from luminous_cli.cli.resources.warehouses import group as warehouses_group
 from luminous_cli.cli.resources.stock_snapshot import group as stock_snapshot_group
 from luminous_cli.cli.resources.consumption import group as consumption_group
 from luminous_cli.cli.resources.inventory_aging import group as inventory_aging_group
-from luminous_cli.cli.resources.bills_reports import group as bills_group
+from luminous_cli.cli.resources.bills import group as bills_group
 from luminous_cli.cli.resources.forecast import group as forecast_group
 from luminous_cli.cli.resources.reports import group as reports_group
+from luminous_cli.cli.resources.currency import group as currency_group
+from luminous_cli.cli.resources.fulfillment_orders import group as fulfillment_orders_group
+from luminous_cli.cli.resources.payment_obligations import group as payment_obligations_group
+from luminous_cli.cli.resources.prepayments import group as prepayments_group
+from luminous_cli.cli.resources.vendor_credits import group as vendor_credits_group
+from luminous_cli.cli.resources.vendor_returns import group as vendor_returns_group
+from luminous_cli.cli.resources.integration_mappings import group as integration_field_mappings_group
+from luminous_cli.cli.resources.integration_mappings import mappings_group as integration_mappings_group
 
 ALL_GROUPS = [
     products_group,
@@ -46,6 +54,14 @@ ALL_GROUPS = [
     bills_group,
     forecast_group,
     reports_group,
+    currency_group,
+    fulfillment_orders_group,
+    payment_obligations_group,
+    prepayments_group,
+    vendor_credits_group,
+    vendor_returns_group,
+    integration_field_mappings_group,
+    integration_mappings_group,
 ]
 
 

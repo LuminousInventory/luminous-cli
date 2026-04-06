@@ -1,8 +1,16 @@
 """Products resource."""
 
+from __future__ import annotations
+
+import typer
+
+from luminous_cli.cli._options import FormatOption, JsonOption, FileOption
 from luminous_cli.cli.resources._factory import ResourceSpec, make_resource_group
+from luminous_cli.cli.resources._input import resolve_input
 from luminous_cli.cli.resources._tags import make_tags_group
 from luminous_cli.cli.resources._custom_fields import make_custom_fields_group
+from luminous_cli.client import get_client
+from luminous_cli.output.json_out import render_json
 
 spec = ResourceSpec(
     name="products",
@@ -24,3 +32,38 @@ spec = ResourceSpec(
 group = make_resource_group(spec)
 group.add_typer(make_tags_group("products"))
 group.add_typer(make_custom_fields_group("products"))
+
+
+@group.command("add-alt-sku")
+def add_alt_sku(
+    product_id: int = typer.Argument(..., help="Product ID"),
+    sku: str = typer.Argument(..., help="Alternate SKU to add"),
+) -> None:
+    """Add an alternate SKU to a product."""
+    client = get_client()
+    client.request("POST", f"/products/{product_id}/alternate-skus", json_body={"sku": sku})
+    typer.echo(f"Added alternate SKU '{sku}' to product {product_id}")
+
+
+@group.command("attach-boms")
+def attach_boms(
+    product_id: int = typer.Argument(..., help="Product ID"),
+    bom_ids: str = typer.Argument(..., help="Comma-separated BOM IDs"),
+) -> None:
+    """Attach BOMs to a product."""
+    ids = [int(x.strip()) for x in bom_ids.split(",")]
+    client = get_client()
+    client.request("POST", f"/products/{product_id}/boms", json_body={"bom_ids": ids})
+    typer.echo(f"Attached {len(ids)} BOM(s) to product {product_id}")
+
+
+@group.command("detach-boms")
+def detach_boms(
+    product_id: int = typer.Argument(..., help="Product ID"),
+    bom_ids: str = typer.Argument(..., help="Comma-separated BOM IDs"),
+) -> None:
+    """Detach BOMs from a product."""
+    ids = [int(x.strip()) for x in bom_ids.split(",")]
+    client = get_client()
+    client.request("DELETE", f"/products/{product_id}/boms", json_body={"bom_ids": ids})
+    typer.echo(f"Detached {len(ids)} BOM(s) from product {product_id}")
