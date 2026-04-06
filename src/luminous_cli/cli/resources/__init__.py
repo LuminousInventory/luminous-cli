@@ -18,6 +18,12 @@ from luminous_cli.cli.resources.receiving_reports import group as receiving_repo
 from luminous_cli.cli.resources.sales_orders import group as sales_orders_group
 from luminous_cli.cli.resources.transfer_orders import group as transfer_orders_group
 from luminous_cli.cli.resources.warehouses import group as warehouses_group
+from luminous_cli.cli.resources.stock_snapshot import group as stock_snapshot_group
+from luminous_cli.cli.resources.consumption import group as consumption_group
+from luminous_cli.cli.resources.inventory_aging import group as inventory_aging_group
+from luminous_cli.cli.resources.bills_reports import group as bills_group
+from luminous_cli.cli.resources.forecast import group as forecast_group
+from luminous_cli.cli.resources.reports import group as reports_group
 
 ALL_GROUPS = [
     products_group,
@@ -34,6 +40,12 @@ ALL_GROUPS = [
     warehouses_group,
     price_schedules_group,
     price_levels_group,
+    stock_snapshot_group,
+    consumption_group,
+    inventory_aging_group,
+    bills_group,
+    forecast_group,
+    reports_group,
 ]
 
 

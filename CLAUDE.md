@@ -30,6 +30,12 @@ luminous <resource> <action> [options]
 | `locations` | `list`, `get <id>` |
 | `price-schedules` | `list`, `get <id>` |
 | `price-levels` | `list`, `get <id>` |
+| `stock-snapshot` | `get --start-date YYYY-MM-DD --end-date YYYY-MM-DD` |
+| `consumption` | `list`, `export` |
+| `inventory-aging` | `list`, `export` |
+| `bills` | `aging` |
+| `forecast` | `list`, `get <id>`, `product <rfq_id>`, `export`, `refresh-status`, `warehouse list\|get\|product\|export\|refresh-status` |
+| `reports` | `cogs`, `close-books sales-summary\|zero-cost-items\|zero-valuation\|invoice-sync-errors`, `discrepancy list\|dashboard`, `edi list\|summary\|export` |
 
 ## Querying Data
 

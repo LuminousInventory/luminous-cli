@@ -97,6 +97,12 @@ Features: tab completion, command history (persisted), colored prompt with profi
 | **locations** | `list` `get` |
 | **price-schedules** | `list` `get` |
 | **price-levels** | `list` `get` |
+| **stock-snapshot** | `get` |
+| **consumption** | `list` `export` |
+| **inventory-aging** | `list` `export` |
+| **bills** | `aging` |
+| **forecast** | `list` `get` `product` `export` `refresh-status` `warehouse` |
+| **reports** | `cogs` `close-books` `discrepancy` `edi` |
 
 ### Auth & Config
 
