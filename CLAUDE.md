@@ -20,30 +20,32 @@ luminous <resource> <action> [options]
 | `sales-orders` | `list`, `get`, `create`, `update`, `export`, `shipments`, `tags`, `custom-fields` |
 | `purchase-orders` | `list`, `get`, `create`, `update`, `delete`, `items`, `payments` |
 | `inventory` | `stocks`, `adjust` |
-| `transfer-orders` | `list`, `get`, `create` |
+| `transfer-orders` | `list`, `get`, `create`, `update` |
 | `receiving-reports` | `list`, `get`, `create` |
-| `invoices` | `list`, `get`, `tags`, `custom-fields` |
+| `invoices` | `list`, `get`, `create`, `tags`, `custom-fields` |
 | `companies` | `list`, `get`, `create`, `update`, `delete`, `contacts`, `products`, `price-overrides`, `tags`, `custom-fields` |
-| `contacts` | `list`, `get`, `create`, `update`, `delete`, `set-password` |
+| `contacts` | `list`, `get`, `create`, `update`, `delete`, `set-password`, `set-b2b-portal-password` |
 | `boms` | `list`, `get`, `create`, `update`, `delete` |
-| `warehouses` | `list`, `get` |
+| `warehouses` | `list`, `get`, `create`, `update`, `delete` |
+| `warehouse-groups` | `list`, `get`, `create`, `update`, `delete` |
 | `locations` | `list`, `get` |
 | `price-schedules` | `list`, `get` |
 | `price-levels` | `list`, `get` |
-| `bills` | `list`, `get`, `create`, `update`, `delete`, `post`, `hold`, `unhold`, `reopen`, `variance`, `resolve-variance`, `auto-allocate`, `duplicate-check`, `summary`, `inbox`, `by-vendor`, `by-po`, `aging`, `payments`, `allocations` |
+| `bills` | `list`, `get`, `create`, `update`, `delete`, `post`, `hold`, `unhold`, `reopen`, `variance`, `resolve-variance`, `auto-allocate`, `duplicate-check`, `summary`, `inbox`, `by-vendor`, `by-po`, `aging`, `import-parse`, `payments`, `allocations`, `attachments`, `bill-items` |
 | `stock-snapshot` | `get --start-date --end-date` |
 | `consumption` | `list`, `export` |
 | `inventory-aging` | `list`, `export` |
 | `forecast` | `list`, `get`, `product`, `export`, `refresh-status`, `warehouse` |
-| `reports` | `cogs`, `close-books`, `discrepancy`, `edi` |
+| `reports` | `cogs`, `cogs-update-costs`, `close-books`, `discrepancy`, `edi` |
 | `currency` | `list`, `base`, `set-base`, `rates`, `create-rate`, `convert` |
 | `fulfillment-orders` | `list` |
 | `payment-obligations` | `list`, `get`, `update`, `dashboard`, `link-bill`, `unlink-bill` |
 | `prepayments` | `list`, `create`, `apply`, `reverse` |
 | `vendor-credits` | `list`, `get`, `create`, `apply`, `cancel`, `reverse`, `delete-application`, `vendor-statement` |
 | `vendor-returns` | `list`, `get`, `create`, `process`, `cancel`, `generate-credit` |
-| `integration-field-mappings` | `list`, `get`, `create`, `update`, `delete`, `bulk-create`, `bulk-delete`, `field-names`, `groups`, `suggest-carrier` |
+| `integration-field-mappings` | `list`, `get`, `create`, `update`, `delete`, `bulk-create`, `bulk-delete`, `field-names`, `groups`, `suggest-carrier`, `create-and-retry`, `auto-carrier-mapping` |
 | `integration-mappings` | `list`, `get`, `create`, `update`, `delete` |
+| `labels` | `render` |
 
 ## Querying Data
 

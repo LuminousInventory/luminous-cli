@@ -152,6 +152,30 @@ def ifm_suggest_carrier(
     render_json(data)
 
 
+@group.command("create-and-retry")
+def ifm_create_and_retry(
+    json_input: JsonOption = None,
+    file: FileOption = None,
+) -> None:
+    """Create an integration field mapping and retry failed records."""
+    payload = resolve_input(json_input=json_input, file_input=file)
+    client = get_client()
+    data = client.request("POST", "/integration-field-mappings/create-and-retry", json_body=payload)
+    render_json(data)
+
+
+@group.command("auto-carrier-mapping")
+def ifm_auto_carrier_mapping(
+    json_input: JsonOption = None,
+    file: FileOption = None,
+) -> None:
+    """Toggle automatic carrier mapping."""
+    payload = resolve_input(json_input=json_input, file_input=file) or {}
+    client = get_client()
+    data = client.request("POST", "/integration-field-mappings/auto-carrier-mapping", json_body=payload)
+    render_json(data)
+
+
 # --- Integration Mappings ---
 
 mappings_group = typer.Typer(name="integration-mappings", help="Integration mappings")

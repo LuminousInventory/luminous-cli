@@ -153,3 +153,50 @@ def payment_delete(
 
 
 group.add_typer(payments_app)
+
+# --- Payment obligations subresource ---
+
+po_obligations_app = typer.Typer(name="payment-obligations", help="Purchase order payment obligations")
+
+
+@po_obligations_app.command("list")
+def po_obligations_list(
+    po_id: int = typer.Argument(..., help="Purchase order ID"),
+    format: FormatOption = None,
+) -> None:
+    """List payment obligations for a purchase order."""
+    from luminous_cli.output.json_out import render_json
+    client = get_client()
+    data = client.request("GET", f"/purchase-orders/{po_id}/payment-obligations")
+    render_json(data)
+
+
+@po_obligations_app.command("create")
+def po_obligations_create(
+    po_id: int = typer.Argument(..., help="Purchase order ID"),
+    json_input: JsonOption = None,
+    file: FileOption = None,
+) -> None:
+    """Create a payment obligation for a purchase order."""
+    from luminous_cli.output.json_out import render_json
+    payload = resolve_input(json_input=json_input, file_input=file)
+    client = get_client()
+    data = client.request("POST", f"/purchase-orders/{po_id}/payment-obligations", json_body=payload)
+    render_json(data)
+
+
+@po_obligations_app.command("generate")
+def po_obligations_generate(
+    po_id: int = typer.Argument(..., help="Purchase order ID"),
+    json_input: JsonOption = None,
+    file: FileOption = None,
+) -> None:
+    """Auto-generate payment obligations for a purchase order."""
+    from luminous_cli.output.json_out import render_json
+    payload = resolve_input(json_input=json_input, file_input=file) or {}
+    client = get_client()
+    data = client.request("POST", f"/purchase-orders/{po_id}/payment-obligations/generate", json_body=payload)
+    render_json(data)
+
+
+group.add_typer(po_obligations_app)

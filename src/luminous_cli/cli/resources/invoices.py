@@ -18,7 +18,7 @@ spec = ResourceSpec(
         ("Due", "total_due", "yellow"),
         ("Date", "order_date", ""),
     ],
-    capabilities={"list", "get"},
+    capabilities={"list", "get", "create"},
 )
 
 group = make_resource_group(spec)

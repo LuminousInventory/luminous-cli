@@ -122,6 +122,19 @@ COGS_COLUMNS = [
 ]
 
 
+@group.command("cogs-update-costs")
+def transaction_cogs_update_costs(
+    json_input: str = typer.Option(None, "--json"),
+    file: Optional[str] = typer.Option(None, "--file"),
+) -> None:
+    """Recalculate and update COGS costs for transactions."""
+    from luminous_cli.cli.resources._input import resolve_input
+    payload = resolve_input(json_input=json_input, file_input=file) or {}
+    client = get_client()
+    data = client.request("POST", "/transaction-cogs/update-costs", json_body=payload)
+    render_json(data)
+
+
 @group.command("cogs")
 def transaction_cogs(
     filter: FilterOption = None,

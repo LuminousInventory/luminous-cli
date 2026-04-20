@@ -130,6 +130,18 @@ def shipments_add_packages(
     render(result, columns=[("ID", "id", "dim")], fmt=fmt)
 
 
+@shipments_app.command("billable-lines")
+def shipments_billable_lines(
+    shipment_id: int = typer.Argument(..., help="Shipment ID"),
+    format: FormatOption = None,
+) -> None:
+    """Get billable lines for a shipment."""
+    from luminous_cli.output.json_out import render_json
+    client = get_client()
+    data = client.request("GET", f"/shipments/{shipment_id}/billable-lines")
+    render_json(data)
+
+
 group.add_typer(shipments_app)
 
 # --- Export command ---

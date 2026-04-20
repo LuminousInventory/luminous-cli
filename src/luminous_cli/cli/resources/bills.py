@@ -280,3 +280,107 @@ def bills_aging(
     client = get_client()
     data = client.request("GET", "/bills/reports/aging")
     render_json(data)
+
+
+@group.command("import-parse")
+def bill_import_parse(
+    json_input: JsonOption = None,
+    file: FileOption = None,
+) -> None:
+    """Parse a bill import payload before creating."""
+    payload = resolve_input(json_input=json_input, file_input=file)
+    client = get_client()
+    data = client.request("POST", "/bills/import/parse", json_body=payload)
+    render_json(data)
+
+
+# --- Bill attachments ---
+
+attachments_app = typer.Typer(name="attachments", help="Bill attachments")
+
+
+@attachments_app.command("upload")
+def attachment_upload(
+    bill_id: int = typer.Argument(..., help="Bill ID"),
+    json_input: JsonOption = None,
+    file: FileOption = None,
+) -> None:
+    """Upload an attachment to a bill."""
+    payload = resolve_input(json_input=json_input, file_input=file)
+    client = get_client()
+    data = client.request("POST", f"/bills/{bill_id}/attachments", json_body=payload)
+    render_json(data)
+
+
+@attachments_app.command("download")
+def attachment_download(
+    bill_id: int = typer.Argument(..., help="Bill ID"),
+    attachment_id: int = typer.Argument(..., help="Attachment ID"),
+) -> None:
+    """Download a bill attachment (returns URL or content)."""
+    client = get_client()
+    data = client.request("GET", f"/bills/{bill_id}/attachments/{attachment_id}/download")
+    render_json(data)
+
+
+@attachments_app.command("delete")
+def attachment_delete(
+    bill_id: int = typer.Argument(..., help="Bill ID"),
+    attachment_id: int = typer.Argument(..., help="Attachment ID"),
+    yes: YesOption = False,
+) -> None:
+    """Delete a bill attachment."""
+    if not yes:
+        typer.confirm(f"Delete attachment {attachment_id} from bill {bill_id}?", abort=True)
+    client = get_client()
+    client.request("DELETE", f"/bills/{bill_id}/attachments/{attachment_id}")
+    typer.echo(f"Deleted attachment {attachment_id}")
+
+
+group.add_typer(attachments_app)
+
+# --- Bill items ---
+
+bill_items_app = typer.Typer(name="bill-items", help="Bill line item operations")
+
+
+@bill_items_app.command("eligible-lines")
+def bill_item_eligible_lines(
+    bill_id: int = typer.Argument(..., help="Bill ID"),
+    bill_item_id: int = typer.Argument(..., help="Bill item ID"),
+) -> None:
+    """Get eligible PO lines for a bill item."""
+    client = get_client()
+    data = client.request("GET", f"/bills/{bill_id}/bill-items/{bill_item_id}/eligible-lines")
+    render_json(data)
+
+
+@bill_items_app.command("ai-suggestions")
+def bill_item_ai_suggestions(
+    bill_id: int = typer.Argument(..., help="Bill ID"),
+    bill_item_id: int = typer.Argument(..., help="Bill item ID"),
+    json_input: JsonOption = None,
+    file: FileOption = None,
+) -> None:
+    """Get AI-driven allocation suggestions for a bill item."""
+    payload = resolve_input(json_input=json_input, file_input=file) or {}
+    client = get_client()
+    data = client.request("POST", f"/bills/{bill_id}/bill-items/{bill_item_id}/ai-suggestions", json_body=payload)
+    render_json(data)
+
+
+@bill_items_app.command("prorate-allocate")
+def bill_item_prorate_allocate(
+    bill_id: int = typer.Argument(..., help="Bill ID"),
+    bill_item_id: int = typer.Argument(..., help="Bill item ID"),
+    json_input: JsonOption = None,
+    file: FileOption = None,
+) -> None:
+    """Prorate-allocate a bill item across PO lines."""
+    payload = resolve_input(json_input=json_input, file_input=file) or {}
+    client = get_client()
+    data = client.request("POST", f"/bills/{bill_id}/bill-items/{bill_item_id}/prorate-allocate", json_body=payload)
+    render_json(data)
+
+
+group.add_typer(bill_items_app)

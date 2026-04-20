@@ -33,3 +33,14 @@ def set_password(
     client = get_client()
     client.request("POST", f"/contacts/{contact_id}/password", json_body={"password": password})
     typer.echo(f"Password set for contact {contact_id}")
+
+
+@group.command("set-b2b-portal-password")
+def set_b2b_portal_password(
+    contact_id: int = typer.Argument(..., help="Contact ID"),
+    password: str = typer.Option(..., "--password", prompt=True, hide_input=True, help="B2B portal password"),
+) -> None:
+    """Set B2B portal password for a contact."""
+    client = get_client()
+    client.request("POST", f"/contacts/{contact_id}/b2b-portal-password", json_body={"password": password})
+    typer.echo(f"B2B portal password set for contact {contact_id}")

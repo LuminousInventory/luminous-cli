@@ -32,6 +32,8 @@ from luminous_cli.cli.resources.vendor_credits import group as vendor_credits_gr
 from luminous_cli.cli.resources.vendor_returns import group as vendor_returns_group
 from luminous_cli.cli.resources.integration_mappings import group as integration_field_mappings_group
 from luminous_cli.cli.resources.integration_mappings import mappings_group as integration_mappings_group
+from luminous_cli.cli.resources.warehouse_groups import group as warehouse_groups_group
+from luminous_cli.cli.resources.labels import group as labels_group
 
 ALL_GROUPS = [
     products_group,
@@ -62,6 +64,8 @@ ALL_GROUPS = [
     vendor_returns_group,
     integration_field_mappings_group,
     integration_mappings_group,
+    warehouse_groups_group,
+    labels_group,
 ]
 
 

@@ -15,7 +15,8 @@ spec = ResourceSpec(
         ("Date", "date", ""),
         ("Arrival", "arrival_date", ""),
     ],
-    capabilities={"list", "get", "create"},
+    capabilities={"list", "get", "create", "update"},
+    update_method="PUT",
 )
 
 group = make_resource_group(spec)
