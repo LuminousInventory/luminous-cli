@@ -39,6 +39,7 @@ spec = ResourceSpec(
         ("Due Date", "due_date", ""),
     ],
     capabilities={"list", "get", "create", "update", "delete"},
+    update_method="PUT",
 )
 
 # Replace the factory-generated group with our own that has the existing commands
@@ -135,7 +136,7 @@ def bill_duplicate_check(
         params["vendor_id"] = str(vendor_id)
     if bill_number:
         params["bill_number"] = bill_number
-    data = client.request("GET", "/bills/duplicate-check", params=params)
+    data = client.request("GET", "/bills/check-duplicate", params=params)
     render_json(data)
 
 
@@ -279,6 +280,66 @@ def bills_aging(
     """AP bills aging report grouped by vendor."""
     client = get_client()
     data = client.request("GET", "/bills/reports/aging")
+    render_json(data)
+
+
+@group.command("calculate-due-date")
+def bill_calculate_due_date(
+    vendor_id: Optional[int] = typer.Option(None, "--vendor-id"),
+    bill_date: Optional[str] = typer.Option(None, "--bill-date"),
+    format: FormatOption = None,
+) -> None:
+    """Calculate the due date for a bill."""
+    client = get_client()
+    payload: dict[str, str] = {}
+    if vendor_id:
+        payload["vendor_id"] = str(vendor_id)
+    if bill_date:
+        payload["bill_date"] = bill_date
+    data = client.request("POST", "/bills/calculate-due-date", json_body=payload)
+    render_json(data)
+
+
+@group.command("from-shipments-prefill")
+def bill_from_shipments_prefill(
+    format: FormatOption = None,
+) -> None:
+    """Prefill a bill from shipments data."""
+    client = get_client()
+    data = client.request("GET", "/bills/from-shipments/prefill")
+    render_json(data)
+
+
+@group.command("billable-lines")
+def bill_billable_lines(
+    bill_id: int = typer.Argument(..., help="Bill ID"),
+    format: FormatOption = None,
+) -> None:
+    """Get billable lines for a bill."""
+    client = get_client()
+    data = client.request("GET", f"/bills/{bill_id}/billable-lines")
+    render_json(data)
+
+
+@group.command("candidate-lines")
+def bill_candidate_lines(
+    bill_id: int = typer.Argument(..., help="Bill ID"),
+    format: FormatOption = None,
+) -> None:
+    """Get candidate PO lines for a bill."""
+    client = get_client()
+    data = client.request("GET", f"/bills/{bill_id}/candidate-lines")
+    render_json(data)
+
+
+@group.command("status")
+def bill_status_update(
+    bill_id: int = typer.Argument(..., help="Bill ID"),
+    status: str = typer.Argument(..., help="New status value"),
+) -> None:
+    """Update the status of a bill."""
+    client = get_client()
+    data = client.request("PATCH", f"/bills/{bill_id}/status", json_body={"status": status})
     render_json(data)
 
 

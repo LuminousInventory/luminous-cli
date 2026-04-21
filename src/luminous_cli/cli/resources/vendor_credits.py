@@ -129,7 +129,18 @@ def vendor_statement(
     vendor_id: int = typer.Argument(..., help="Vendor (company) ID"),
     format: FormatOption = None,
 ) -> None:
-    """Get a vendor statement."""
+    """Get a vendor statement (via vendor-credits endpoint)."""
     client = get_client()
     data = client.request("GET", f"/vendor-credits/vendor/{vendor_id}/statement")
+    render_json(data)
+
+
+@group.command("statement")
+def vendor_statement_direct(
+    vendor_id: int = typer.Argument(..., help="Vendor (company) ID"),
+    format: FormatOption = None,
+) -> None:
+    """Get a vendor statement."""
+    client = get_client()
+    data = client.request("GET", f"/vendors/{vendor_id}/statement")
     render_json(data)

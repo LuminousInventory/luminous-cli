@@ -39,6 +39,7 @@ spec = ResourceSpec(
         ("Updated", "updated_at", "dim"),
     ],
     capabilities={"list", "get", "create", "update"},
+    update_method="PATCH",
 )
 
 group = make_resource_group(spec)

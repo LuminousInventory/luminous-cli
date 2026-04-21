@@ -200,3 +200,48 @@ def po_obligations_generate(
 
 
 group.add_typer(po_obligations_app)
+
+
+@group.command("billable-lines")
+def po_billable_lines(
+    po_id: int = typer.Argument(..., help="Purchase order ID"),
+    format: FormatOption = None,
+) -> None:
+    """Get billable lines for a purchase order."""
+    from luminous_cli.output.json_out import render_json
+    client = get_client()
+    data = client.request("GET", f"/purchase-orders/{po_id}/billable-lines")
+    render_json(data)
+
+
+# --- PO Shipments subresource ---
+
+po_shipments_app = typer.Typer(name="shipments", help="Purchase order shipments")
+
+
+@po_shipments_app.command("list")
+def po_shipments_list(
+    po_id: int = typer.Argument(..., help="Purchase order ID"),
+    format: FormatOption = None,
+) -> None:
+    """List shipments for a purchase order."""
+    from luminous_cli.output.json_out import render_json
+    client = get_client()
+    data = client.request("GET", f"/purchase-orders/{po_id}/shipments")
+    render_json(data)
+
+
+@po_shipments_app.command("get")
+def po_shipments_get(
+    po_id: int = typer.Argument(..., help="Purchase order ID"),
+    shipment_id: int = typer.Argument(..., help="Shipment ID"),
+    format: FormatOption = None,
+) -> None:
+    """Get a specific shipment for a purchase order."""
+    from luminous_cli.output.json_out import render_json
+    client = get_client()
+    data = client.request("GET", f"/purchase-orders/{po_id}/shipments/{shipment_id}")
+    render_json(data)
+
+
+group.add_typer(po_shipments_app)

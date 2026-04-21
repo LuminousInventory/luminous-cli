@@ -34,6 +34,48 @@ group.add_typer(make_tags_group("products"))
 group.add_typer(make_custom_fields_group("products"))
 
 
+@group.command("pricing")
+def product_pricing(
+    format: FormatOption = None,
+) -> None:
+    """Get pricing data for all products."""
+    client = get_client()
+    data = client.request("GET", "/products/pricing")
+    render_json(data)
+
+
+@group.command("company-pricing")
+def product_company_pricing(
+    format: FormatOption = None,
+) -> None:
+    """Get company-specific pricing for all products."""
+    client = get_client()
+    data = client.request("GET", "/products/company-pricing")
+    render_json(data)
+
+
+@group.command("get-pricing")
+def product_get_pricing(
+    product_id: int = typer.Argument(..., help="Product ID"),
+    format: FormatOption = None,
+) -> None:
+    """Get pricing for a specific product."""
+    client = get_client()
+    data = client.request("GET", f"/products/{product_id}/pricing")
+    render_json(data)
+
+
+@group.command("get-company-pricing")
+def product_get_company_pricing(
+    product_id: int = typer.Argument(..., help="Product ID"),
+    format: FormatOption = None,
+) -> None:
+    """Get company-specific pricing for a specific product."""
+    client = get_client()
+    data = client.request("GET", f"/products/{product_id}/company-pricing")
+    render_json(data)
+
+
 @group.command("add-alt-sku")
 def add_alt_sku(
     product_id: int = typer.Argument(..., help="Product ID"),

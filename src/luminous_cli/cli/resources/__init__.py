@@ -34,6 +34,8 @@ from luminous_cli.cli.resources.integration_mappings import group as integration
 from luminous_cli.cli.resources.integration_mappings import mappings_group as integration_mappings_group
 from luminous_cli.cli.resources.warehouse_groups import group as warehouse_groups_group
 from luminous_cli.cli.resources.labels import group as labels_group
+from luminous_cli.cli.resources.inbound_shipments import group as inbound_shipments_group
+from luminous_cli.cli.resources.purchase_order_shipments import group as purchase_order_shipments_group
 
 ALL_GROUPS = [
     products_group,
@@ -66,6 +68,8 @@ ALL_GROUPS = [
     integration_mappings_group,
     warehouse_groups_group,
     labels_group,
+    inbound_shipments_group,
+    purchase_order_shipments_group,
 ]
 
 

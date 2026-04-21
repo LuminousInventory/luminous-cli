@@ -44,7 +44,7 @@ def ifm_list(
     """List integration field mappings."""
     client = get_client()
     qp = QueryParams.from_cli_args(raw_filters=filter, page=page, per_page=per_page)
-    resp = client.list("/integration-field-mappings", params=qp)
+    resp = client.list("/integration/field-mappings", params=qp)
     fmt = resolve_format(format)
     render(resp.data, columns=COLUMNS, pagination=resp.pagination, fmt=fmt)
 
@@ -56,7 +56,7 @@ def ifm_get(
 ) -> None:
     """Get an integration field mapping."""
     client = get_client()
-    data = client.get("/integration-field-mappings", mapping_id)
+    data = client.get("/integration/field-mappings", mapping_id)
     fmt = resolve_format(format)
     render(data, columns=COLUMNS, fmt=fmt)
 
@@ -69,7 +69,7 @@ def ifm_create(
     """Create an integration field mapping."""
     payload = resolve_input(json_input=json_input, file_input=file)
     client = get_client()
-    data = client.request("POST", "/integration-field-mappings", json_body=payload)
+    data = client.request("POST", "/integration/field-mappings", json_body=payload)
     render_json(data)
 
 
@@ -82,7 +82,7 @@ def ifm_update(
     """Update an integration field mapping."""
     payload = resolve_input(json_input=json_input, file_input=file)
     client = get_client()
-    data = client.update("/integration-field-mappings", mapping_id, payload)
+    data = client.update("/integration/field-mappings", mapping_id, payload)
     render_json(data)
 
 
@@ -95,7 +95,7 @@ def ifm_delete(
     if not yes:
         typer.confirm(f"Delete mapping {mapping_id}?", abort=True)
     client = get_client()
-    client.delete("/integration-field-mappings", mapping_id)
+    client.delete("/integration/field-mappings", mapping_id)
     typer.echo(f"Deleted mapping {mapping_id}")
 
 
@@ -107,7 +107,7 @@ def ifm_bulk_create(
     """Bulk create integration field mappings."""
     payload = resolve_input(json_input=json_input, file_input=file)
     client = get_client()
-    data = client.request("POST", "/integration-field-mappings/bulk", json_body=payload)
+    data = client.request("POST", "/integration/field-mappings/bulk", json_body=payload)
     render_json(data)
 
 
@@ -122,15 +122,15 @@ def ifm_bulk_delete(
         typer.confirm("Bulk delete mappings?", abort=True)
     payload = resolve_input(json_input=json_input, file_input=file)
     client = get_client()
-    client.request("POST", "/integration-field-mappings/bulk-delete", json_body=payload)
+    client.request("POST", "/integration/field-mappings/bulk-delete", json_body=payload)
     typer.echo("Bulk delete complete")
 
 
 @group.command("field-names")
 def ifm_field_names() -> None:
-    """List distinct field name values."""
+    """List available integration field names."""
     client = get_client()
-    data = client.request("GET", "/integration-field-mappings/field-names")
+    data = client.request("GET", "/integration/field-mappings/fields")
     render_json(data)
 
 
@@ -138,7 +138,7 @@ def ifm_field_names() -> None:
 def ifm_groups() -> None:
     """List distinct mapping group values."""
     client = get_client()
-    data = client.request("GET", "/integration-field-mappings/groups")
+    data = client.request("GET", "/integration/field-mappings/groups")
     render_json(data)
 
 
@@ -148,7 +148,19 @@ def ifm_suggest_carrier(
 ) -> None:
     """Suggest carrier mapping via fuzzy match."""
     client = get_client()
-    data = client.request("GET", "/integration-field-mappings/suggest-carrier", params={"carrier": carrier})
+    data = client.request("POST", "/integration/field-mappings/suggest-carrier", json_body={"carrier": carrier})
+    render_json(data)
+
+
+@group.command("quick-add")
+def ifm_quick_add(
+    json_input: JsonOption = None,
+    file: FileOption = None,
+) -> None:
+    """Quickly add an integration field mapping."""
+    payload = resolve_input(json_input=json_input, file_input=file)
+    client = get_client()
+    data = client.request("POST", "/integration/field-mappings/quick-add", json_body=payload)
     render_json(data)
 
 
@@ -160,7 +172,7 @@ def ifm_create_and_retry(
     """Create an integration field mapping and retry failed records."""
     payload = resolve_input(json_input=json_input, file_input=file)
     client = get_client()
-    data = client.request("POST", "/integration-field-mappings/create-and-retry", json_body=payload)
+    data = client.request("POST", "/integration/field-mappings/create-and-retry", json_body=payload)
     render_json(data)
 
 
@@ -172,7 +184,7 @@ def ifm_auto_carrier_mapping(
     """Toggle automatic carrier mapping."""
     payload = resolve_input(json_input=json_input, file_input=file) or {}
     client = get_client()
-    data = client.request("POST", "/integration-field-mappings/auto-carrier-mapping", json_body=payload)
+    data = client.request("POST", "/integration/field-mappings/auto-carrier-mapping", json_body=payload)
     render_json(data)
 
 
