@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import typer
 
-from luminous_cli.cli._options import FormatOption, JsonOption, FileOption
+from luminous_cli.cli._options import FilterOption, FormatOption, JsonOption, FileOption, SortOption, PerPageOption
 from luminous_cli.cli.resources._factory import ResourceSpec, make_resource_group
 from luminous_cli.cli.resources._input import resolve_input
 from luminous_cli.cli.resources._tags import make_tags_group
@@ -74,6 +74,24 @@ def product_get_company_pricing(
     client = get_client()
     data = client.request("GET", f"/products/{product_id}/company-pricing")
     render_json(data)
+
+
+@group.command("export")
+def product_export(
+    filter: FilterOption = None,
+    sort: SortOption = None,
+    per_page: PerPageOption = 50,
+    format: FormatOption = None,
+) -> None:
+    """Export products."""
+    from luminous_cli.client.query import QueryParams
+    from luminous_cli.output import render
+    from luminous_cli.output.detect import resolve_format
+    client = get_client()
+    qp = QueryParams.from_cli_args(raw_filters=filter, sort=sort, per_page=per_page)
+    resp = client.list("/products/export", params=qp)
+    fmt = resolve_format(format)
+    render(resp.data, columns=spec.columns, pagination=resp.pagination, fmt=fmt)
 
 
 @group.command("add-alt-sku")

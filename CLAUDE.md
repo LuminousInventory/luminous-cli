@@ -16,7 +16,7 @@ luminous <resource> <action> [options]
 
 | Resource | Actions |
 |---|---|
-| `products` | `list`, `get`, `create`, `update`, `upsert`, `delete`, `add-alt-sku`, `attach-boms`, `detach-boms`, `tags`, `custom-fields` |
+| `products` | `list`, `get`, `create`, `update`, `upsert`, `delete`, `export`, `pricing`, `company-pricing`, `get-pricing`, `get-company-pricing`, `add-alt-sku`, `attach-boms`, `detach-boms`, `tags`, `custom-fields` |
 | `sales-orders` | `list`, `get`, `create`, `update` (PATCH), `export`, `shipments`, `tags`, `custom-fields` |
 | `purchase-orders` | `list`, `get`, `create`, `update`, `delete`, `items`, `payments`, `payment-obligations`, `billable-lines`, `shipments` |
 | `purchase-order-shipments` | `list`, `get` |
