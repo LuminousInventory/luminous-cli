@@ -115,3 +115,56 @@ def company_price_overrides(
 
 
 group.add_typer(price_overrides_app)
+
+shipping_addresses_app = typer.Typer(
+    name="shipping-addresses", help="Company shipping addresses"
+)
+
+
+@shipping_addresses_app.command("list")
+def company_shipping_addresses_list(
+    company_id: int = typer.Argument(..., help="Company ID"),
+    page: PageOption = 1,
+    per_page: PerPageOption = 50,
+    format: FormatOption = None,
+) -> None:
+    """List shipping addresses for a company (GET)."""
+    client = get_client()
+    qp = QueryParams(page=page, per_page=per_page)
+    resp = client.list(f"/companies/{company_id}/shipping-addresses", params=qp)
+    fmt = resolve_format(format)
+    columns = [
+        ("ID", "id", "dim"),
+        ("Address", "address", ""),
+        ("City", "city", ""),
+        ("State", "state", ""),
+        ("Default", "is_default", ""),
+    ]
+    render(resp.data, columns=columns, pagination=resp.pagination, fmt=fmt)
+
+
+@shipping_addresses_app.command("get")
+def company_shipping_addresses_get(
+    company_id: int = typer.Argument(..., help="Company ID"),
+    shipping_address_id: int = typer.Argument(..., help="Shipping address ID"),
+    format: FormatOption = None,
+) -> None:
+    """Get one shipping address by ID (GET)."""
+    client = get_client()
+    data = client.request(
+        "GET",
+        f"/companies/{company_id}/shipping-addresses/{shipping_address_id}",
+    )
+    result = data.get("data", data)
+    fmt = resolve_format(format)
+    columns = [
+        ("ID", "id", "dim"),
+        ("Address", "address", ""),
+        ("City", "city", ""),
+        ("State", "state", ""),
+        ("Default", "is_default", ""),
+    ]
+    render([result] if isinstance(result, dict) else result, columns=columns, fmt=fmt)
+
+
+group.add_typer(shipping_addresses_app)
