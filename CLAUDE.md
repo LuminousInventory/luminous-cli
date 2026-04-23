@@ -47,6 +47,8 @@ luminous <resource> <action> [options]
 | `vendor-returns` | `list`, `get`, `create`, `process`, `cancel`, `generate-credit` |
 | `integration-field-mappings` | `list`, `get`, `create`, `update`, `delete`, `bulk-create`, `bulk-delete`, `field-names`, `groups`, `suggest-carrier`, `create-and-retry`, `auto-carrier-mapping`, `quick-add` |
 | `integration-mappings` | `list`, `get`, `create`, `update`, `delete` |
+| `custom-fields` | `list`, `get`, `create`, `update`, `delete` |
+| `suppliers` | `list`, `get`, `create`, `update`, `delete` |
 | `labels` | `render` |
 
 ## Querying Data

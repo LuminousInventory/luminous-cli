@@ -36,6 +36,8 @@ from luminous_cli.cli.resources.warehouse_groups import group as warehouse_group
 from luminous_cli.cli.resources.labels import group as labels_group
 from luminous_cli.cli.resources.inbound_shipments import group as inbound_shipments_group
 from luminous_cli.cli.resources.purchase_order_shipments import group as purchase_order_shipments_group
+from luminous_cli.cli.resources.custom_fields import group as custom_fields_group
+from luminous_cli.cli.resources.suppliers import group as suppliers_group
 
 ALL_GROUPS = [
     products_group,
@@ -70,6 +72,8 @@ ALL_GROUPS = [
     labels_group,
     inbound_shipments_group,
     purchase_order_shipments_group,
+    custom_fields_group,
+    suppliers_group,
 ]
 
 
