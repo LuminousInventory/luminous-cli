@@ -30,6 +30,7 @@ from luminous_cli.cli.resources.payment_obligations import group as payment_obli
 from luminous_cli.cli.resources.prepayments import group as prepayments_group
 from luminous_cli.cli.resources.vendor_credits import group as vendor_credits_group
 from luminous_cli.cli.resources.vendor_returns import group as vendor_returns_group
+from luminous_cli.cli.resources.integration_accounts import group as integration_accounts_group
 from luminous_cli.cli.resources.integration_mappings import group as integration_field_mappings_group
 from luminous_cli.cli.resources.integration_mappings import mappings_group as integration_mappings_group
 from luminous_cli.cli.resources.warehouse_groups import group as warehouse_groups_group
@@ -66,6 +67,7 @@ ALL_GROUPS = [
     prepayments_group,
     vendor_credits_group,
     vendor_returns_group,
+    integration_accounts_group,
     integration_field_mappings_group,
     integration_mappings_group,
     warehouse_groups_group,

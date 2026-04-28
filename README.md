@@ -104,11 +104,12 @@ Features: tab completion, command history (persisted), colored prompt with profi
 | **forecast** | `list` `get` `product` `export` `refresh-status` `warehouse` |
 | **reports** | `cogs` `close-books` `discrepancy` `edi` |
 | **currency** | `list` `base` `set-base` `rates` `create-rate` `convert` |
-| **fulfillment-orders** | `list` |
-| **payment-obligations** | `list` `get` `update` `dashboard` `link-bill` `unlink-bill` |
+| **fulfillment-orders** | `list` `get` `push` `unpush` `create-shipment` |
+| **payment-obligations** | `list` `get` `update` `update-status` `dashboard` `link-bill` `unlink-bill` |
 | **prepayments** | `list` `create` `apply` `reverse` |
 | **vendor-credits** | `list` `get` `create` `apply` `cancel` `reverse` `vendor-statement` |
 | **vendor-returns** | `list` `get` `create` `process` `cancel` `generate-credit` |
+| **integration-accounts** | `shipping-methods` |
 | **integration-field-mappings** | `list` `get` `create` `update` `delete` `bulk-create` `bulk-delete` `field-names` `groups` `suggest-carrier` |
 | **integration-mappings** | `list` `get` `create` `update` `delete` |
 

@@ -167,7 +167,7 @@ def bills_by_vendor(
 ) -> None:
     """List bills for a specific vendor."""
     client = get_client()
-    data = client.request("GET", f"/bills/vendor/{vendor_id}")
+    data = client.request("GET", f"/bills/by-vendor/{vendor_id}")
     render_json(data)
 
 
@@ -178,7 +178,7 @@ def bills_by_po(
 ) -> None:
     """List bills for a specific purchase order."""
     client = get_client()
-    data = client.request("GET", f"/bills/purchase-order/{po_id}")
+    data = client.request("GET", f"/bills/by-purchase-order/{po_id}")
     render_json(data)
 
 

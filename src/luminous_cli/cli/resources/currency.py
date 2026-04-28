@@ -69,7 +69,7 @@ def currency_convert(
 ) -> None:
     """Convert an amount between currencies."""
     client = get_client()
-    data = client.request("GET", "/currency/convert", params={
+    data = client.request("GET", "/currency/rates/convert", params={
         "amount": str(amount), "from": source, "to": target,
     })
     render_json(data)

@@ -96,13 +96,17 @@ def product_export(
 
 @group.command("add-alt-sku")
 def add_alt_sku(
-    product_id: int = typer.Argument(..., help="Product ID"),
-    sku: str = typer.Argument(..., help="Alternate SKU to add"),
+    sku: str = typer.Argument(..., help="Primary/master SKU of the product"),
+    alternate_sku: str = typer.Argument(..., help="Alternate SKU to add"),
 ) -> None:
     """Add an alternate SKU to a product."""
     client = get_client()
-    client.request("POST", f"/products/{product_id}/alternate-skus", json_body={"sku": sku})
-    typer.echo(f"Added alternate SKU '{sku}' to product {product_id}")
+    client.request(
+        "POST",
+        "/products/alternate-sku",
+        json_body={"sku": sku, "alternate_sku": alternate_sku},
+    )
+    typer.echo(f"Added alternate SKU '{alternate_sku}' to product '{sku}'")
 
 
 @group.command("attach-boms")

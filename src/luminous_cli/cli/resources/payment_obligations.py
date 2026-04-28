@@ -100,5 +100,23 @@ def po_unlink_bill(
 ) -> None:
     """Unlink a bill from a payment obligation."""
     client = get_client()
-    client.request("POST", f"/payment-obligations/{obligation_id}/unlink-bill", json_body={"bill_id": bill_id})
+    client.request("DELETE", f"/payment-obligations/{obligation_id}/bills/{bill_id}")
     typer.echo(f"Unlinked bill {bill_id} from obligation {obligation_id}")
+
+
+@group.command("update-status")
+def po_update_status(
+    obligation_id: int = typer.Argument(..., help="Payment obligation ID"),
+    json_input: JsonOption = None,
+    file: FileOption = None,
+) -> None:
+    """Update the status of a payment obligation (PATCH)."""
+    payload = resolve_input(json_input=json_input, file_input=file)
+    if not payload:
+        typer.echo("Provide status data via --json or --file.", err=True)
+        raise typer.Exit(code=1)
+    client = get_client()
+    data = client.request(
+        "PATCH", f"/payment-obligations/{obligation_id}/status", json_body=payload
+    )
+    render_json(data)
