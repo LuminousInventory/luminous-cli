@@ -104,7 +104,11 @@ Features: tab completion, command history (persisted), colored prompt with profi
 | **forecast** | `list` `get` `product` `export` `refresh-status` `warehouse` |
 | **reports** | `cogs` `close-books` `discrepancy` `edi` |
 | **currency** | `list` `base` `set-base` `rates` `create-rate` `convert` |
-| **fulfillment-orders** | `list` `get` `push` `unpush` `create-shipment` |
+| **fulfillment-orders** | `list` `get` `push` `unpush` `remove-so-item` `create-shipment` |
+| **channels** | `list` `get` `create` `update` `delete` `create-sales` `sync-integration-products` `lock` |
+| **unit-classes** | `list` `get` `create` `update` `delete` `set-default-uom` |
+| **unit-of-measures** | `list` `get` `create` `update` `delete` |
+| **unit-conversion-rules** | `list` `get` `create` `update` `delete` `resolve` |
 | **payment-obligations** | `list` `get` `update` `update-status` `dashboard` `link-bill` `unlink-bill` |
 | **prepayments** | `list` `create` `apply` `reverse` |
 | **vendor-credits** | `list` `get` `create` `apply` `cancel` `reverse` `vendor-statement` |

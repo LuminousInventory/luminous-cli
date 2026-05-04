@@ -56,6 +56,27 @@ def fo_unpush(
     render_json(data)
 
 
+@group.command("remove-so-item")
+def fo_remove_so_item(
+    fulfillment_order_id: int = typer.Argument(..., help="Fulfillment order ID"),
+    sales_order_item_id: int = typer.Argument(..., help="Sales order line item ID to remove"),
+    allow_pushed: bool = typer.Option(
+        False, "--allow-pushed", help="Allow removal even if the order is pushed to OMS"
+    ),
+) -> None:
+    """Remove a sales order line from a fulfillment order."""
+    client = get_client()
+    body: dict = {"sales_order_item_id": sales_order_item_id}
+    if allow_pushed:
+        body["allow_pushed"] = True
+    data = client.request(
+        "POST",
+        f"/fulfillment-orders/{fulfillment_order_id}/remove-so-item",
+        json_body=body,
+    )
+    render_json(data)
+
+
 @group.command("create-shipment")
 def fo_create_shipment(
     fulfillment_order_id: int = typer.Argument(..., help="Fulfillment order ID"),

@@ -131,6 +131,33 @@ def shipments_add_packages(
     render(result, columns=[("ID", "id", "dim")], fmt=fmt)
 
 
+@shipments_app.command("force-push-source-fulfillment")
+def shipments_force_push_source_fulfillment(
+    order_id: int = typer.Argument(..., help="Sales order ID"),
+    shipment_id: int = typer.Argument(..., help="Shipment ID"),
+    json_input: JsonOption = None,
+    file: FileOption = None,
+    format: FormatOption = None,
+) -> None:
+    """Force-push shipment fulfillment back to the order source."""
+    payload = resolve_input(json_input=json_input, file_input=file)
+    if not payload:
+        typer.echo(
+            "Provide payload via --json or --file. "
+            "Required: sales_order_item_ids. Optional: tracking_number, carrier.",
+            err=True,
+        )
+        raise typer.Exit(code=1)
+    client = get_client()
+    data = client.request(
+        "POST",
+        f"/sales-orders/{order_id}/shipments/{shipment_id}/force-push-source-fulfillment",
+        json_body=payload,
+    )
+    from luminous_cli.output.json_out import render_json
+    render_json(data)
+
+
 @shipments_app.command("billable-lines")
 def shipments_billable_lines(
     shipment_id: int = typer.Argument(..., help="Shipment ID"),

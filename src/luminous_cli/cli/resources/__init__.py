@@ -39,6 +39,10 @@ from luminous_cli.cli.resources.inbound_shipments import group as inbound_shipme
 from luminous_cli.cli.resources.purchase_order_shipments import group as purchase_order_shipments_group
 from luminous_cli.cli.resources.custom_fields import group as custom_fields_group
 from luminous_cli.cli.resources.suppliers import group as suppliers_group
+from luminous_cli.cli.resources.channels import group as channels_group
+from luminous_cli.cli.resources.unit_classes import group as unit_classes_group
+from luminous_cli.cli.resources.unit_of_measures import group as unit_of_measures_group
+from luminous_cli.cli.resources.unit_conversion_rules import group as unit_conversion_rules_group
 
 ALL_GROUPS = [
     products_group,
@@ -76,6 +80,10 @@ ALL_GROUPS = [
     purchase_order_shipments_group,
     custom_fields_group,
     suppliers_group,
+    channels_group,
+    unit_classes_group,
+    unit_of_measures_group,
+    unit_conversion_rules_group,
 ]
 
 

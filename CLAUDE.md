@@ -17,7 +17,7 @@ luminous <resource> <action> [options]
 | Resource | Actions |
 |---|---|
 | `products` | `list`, `get`, `create`, `update`, `upsert`, `delete`, `export`, `pricing`, `company-pricing`, `get-pricing`, `get-company-pricing`, `add-alt-sku`, `attach-boms`, `detach-boms`, `tags`, `custom-fields` |
-| `sales-orders` | `list`, `get`, `create`, `update` (PATCH), `export`, `shipments`, `tags`, `custom-fields` |
+| `sales-orders` | `list`, `get`, `create`, `update` (PATCH), `export`, `shipments` (incl. `force-push-source-fulfillment`), `tags`, `custom-fields` |
 | `purchase-orders` | `list`, `get`, `create`, `update`, `delete`, `items`, `payments`, `payment-obligations`, `billable-lines`, `shipments` |
 | `purchase-order-shipments` | `list`, `get` |
 | `inventory` | `stocks`, `adjust` |
@@ -40,7 +40,11 @@ luminous <resource> <action> [options]
 | `reports` | `cogs`, `cogs-update-costs`, `close-books`, `discrepancy`, `edi` |
 | `currency` | `list`, `base`, `set-base`, `rates`, `create-rate`, `convert` |
 | `inbound-shipments` | `list`, `get` |
-| `fulfillment-orders` | `list`, `get`, `push`, `unpush`, `create-shipment` |
+| `fulfillment-orders` | `list`, `get`, `push`, `unpush`, `remove-so-item`, `create-shipment` |
+| `channels` | `list`, `get`, `create`, `update`, `delete`, `create-sales`, `sync-integration-products`, `lock` |
+| `unit-classes` | `list`, `get`, `create`, `update`, `delete`, `set-default-uom` |
+| `unit-of-measures` | `list`, `get`, `create`, `update`, `delete` |
+| `unit-conversion-rules` | `list`, `get`, `create`, `update`, `delete`, `resolve` |
 | `payment-obligations` | `list`, `get`, `update`, `update-status`, `dashboard`, `link-bill`, `unlink-bill` |
 | `prepayments` | `list`, `create`, `apply`, `reverse` |
 | `vendor-credits` | `list`, `get`, `create`, `apply`, `cancel`, `reverse`, `delete-application`, `vendor-statement` |
