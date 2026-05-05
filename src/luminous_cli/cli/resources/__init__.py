@@ -43,6 +43,7 @@ from luminous_cli.cli.resources.channels import group as channels_group
 from luminous_cli.cli.resources.unit_classes import group as unit_classes_group
 from luminous_cli.cli.resources.unit_of_measures import group as unit_of_measures_group
 from luminous_cli.cli.resources.unit_conversion_rules import group as unit_conversion_rules_group
+from luminous_cli.cli.resources.returns import group as returns_group
 
 ALL_GROUPS = [
     products_group,
@@ -84,6 +85,7 @@ ALL_GROUPS = [
     unit_classes_group,
     unit_of_measures_group,
     unit_conversion_rules_group,
+    returns_group,
 ]
 
 

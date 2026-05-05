@@ -45,6 +45,7 @@ luminous <resource> <action> [options]
 | `unit-classes` | `list`, `get`, `create`, `update`, `delete`, `set-default-uom` |
 | `unit-of-measures` | `list`, `get`, `create`, `update`, `delete` |
 | `unit-conversion-rules` | `list`, `get`, `create`, `update`, `delete`, `resolve` |
+| `returns` | `list`, `get`, `create`, `delete`, `receive`, `restock` |
 | `payment-obligations` | `list`, `get`, `update`, `update-status`, `dashboard`, `link-bill`, `unlink-bill` |
 | `prepayments` | `list`, `create`, `apply`, `reverse` |
 | `vendor-credits` | `list`, `get`, `create`, `apply`, `cancel`, `reverse`, `delete-application`, `vendor-statement` |
