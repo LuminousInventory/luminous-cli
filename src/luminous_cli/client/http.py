@@ -129,6 +129,27 @@ class LuminousClient:
         """Raw request for custom endpoints."""
         return self._request(method, path, params=params, json_body=json_body)
 
+    def download(
+        self,
+        method: str,
+        path: str,
+        *,
+        params: dict[str, str] | None = None,
+    ) -> httpx.Response:
+        """Raw request for file download endpoints."""
+        kwargs: dict[str, Any] = {}
+        if params:
+            kwargs["params"] = params
+
+        try:
+            resp = self._http.request(method, path, **kwargs)
+            self._check_status(resp)
+            return resp
+        except httpx.ConnectError as exc:
+            raise NetworkError(f"Could not connect: {exc}") from exc
+        except httpx.TimeoutException as exc:
+            raise NetworkError(f"Request timed out: {exc}") from exc
+
     # -- Internals ---------------------------------------------------------
 
     def _request(
